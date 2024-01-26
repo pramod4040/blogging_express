@@ -1,4 +1,5 @@
 const Posts = require("../models/post")
+const { paginate } = require("../utils")
 
 async function createPost(req, res) {
     try {
@@ -22,6 +23,7 @@ async function getMyPosts(req, res) {
         const { username } = req.authUser;
 
         const myPosts = await Posts.find({ author: username })
+        if (!myPosts) return res.status(400).json({"message": "Post Id Not Found!"})
 
         res.status(200)
         return res.json({"message": "Post List", "data": myPosts});
@@ -57,11 +59,13 @@ async function updatePost(req, res) {
         const options = { new: true };
 
         const post = await Posts.findByIdAndUpdate(
-            id, postUpdate, options
-        );
+            id, postUpdate, options);
+        
+        if (!post) return res.status(400).json({"message": "Post Id Not Found!"})
 
-        res.status(200)
-        return res.json({"message": "Updated Post", "data": post});
+        res.status(400)
+        return res.json({"message": "Post Id Not Found!"})
+        
     } catch (err) {
         res.status(500)
         return res.json({"message": "Something Unexpected Happened!", "error": err.message})
@@ -72,6 +76,8 @@ async function deletePost(req, res) {
     try {
         id = req.params.id;
         const postData = await Posts.findByIdAndDelete(id);
+        if (!postData) return res.status(400).json({"message": "Post Id Not Found!"});
+
         res.status(200)
         return res.json({"message": `'${postData.title}' deleted Successfully!`});
     } catch (err) {
@@ -83,14 +89,15 @@ async function deletePost(req, res) {
 
 async function listAllPosts(req, res) {
     try {
-        const perPage = 3;
-        let { page } = req.query;
-        if (page === undefined ) page = 1;
-        console.log(page)
+        // let { page } = req.query;
+        // if (page === undefined || page === '') page = 1;
+        // console.log(page)
 
-        const skipPosts = perPage * (page - 1);
+        // const skipPosts = perPage * (page - 1);
 
-        const postData = await Posts.find({}, "", {skip: skipPosts, limit: perPage});
+        const {skipItems, perPage } = paginate(5, req.query?.page)
+
+        const postData = await Posts.find({}, "", {skip: skipItems, limit: perPage});
         res.status(200)
         return res.json({"message": "All Post Lists", "data": postData});
     } catch (err) {

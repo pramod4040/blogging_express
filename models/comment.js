@@ -13,12 +13,18 @@ const commentSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Post',
         required: true
+    },
+    timestamp: {
+        type: Date,
+        default: () => Date.now()
     }
-    // timestamp: {
-    //     type: timestamp,
-
-    // }
 
 });
+
+commentSchema.methods.toJSON = function toJSON() {
+    const commentObject = this.toObject();
+    delete commentObject.__v;
+    return commentObject;
+}
 
 module.exports = mongoose.model('Comment', commentSchema);
