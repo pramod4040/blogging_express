@@ -32,5 +32,5 @@ app.use('/api', routes);
 
 const PORT = 4000
 app.listen(PORT, function() {
-    console.log(`Blogging site is listening from ${PORT}`)
+    console.log(`Blogging site is listening on ${PORT}`)
 })

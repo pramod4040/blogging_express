@@ -190,14 +190,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/post/65b3d7bc5b392895b81df55c",
+							"raw": "{{host}}/api/post/65b4a7519355f3cdef0aa024",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"post",
-								"65b3d7bc5b392895b81df55c"
+								"65b4a7519355f3cdef0aa024"
 							]
 						}
 					},
@@ -220,7 +220,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"title\": \"Manoz Edit post title\",\n    \"content\": \"aksdnaknf knaskdnf\"\n}",
+							"raw": "{\n    \"title\": \"New edidt test\",\n    \"content\": \"aksdnaknf knaskdnf\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -228,14 +228,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/post/65b3d7bc5b392895b81df55c",
+							"raw": "{{host}}/api/post/65b4a7519355f3cdef0aa024",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"post",
-								"65b3d7bc5b392895b81df55c"
+								"65b4a7519355f3cdef0aa024"
 							]
 						}
 					},
@@ -360,14 +360,14 @@
 							"formdata": []
 						},
 						"url": {
-							"raw": "{{host}}/api/post/65b3d7bc5b392895b81df55c/comment?page=1",
+							"raw": "{{host}}/api/post/65b4879713b57f1a78e6c45b/comment?page=1",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"post",
-								"65b3d7bc5b392895b81df55c",
+								"65b4879713b57f1a78e6c45b",
 								"comment"
 							],
 							"query": [
