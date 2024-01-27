@@ -94,39 +94,14 @@ async function deletePost(req, res) {
 
 async function listAllPosts(req, res) {
     try {
-        // let { page } = req.query;
-        // if (page === undefined || page === '') page = 1;
-        // console.log(page)
-
-        // const skipPosts = perPage * (page - 1);
 
         const PER_PAGE = 5
         const totalCount = await Posts.countDocuments({})
         const {pageDetails, skipItems, perPage} = paginate(totalCount, PER_PAGE, req.query?.page)
 
 
-        // let maxPage = 1
-        // if (totalCount > 0) {
-        //     maxPage = Math.ceil((totalCount / PER_PAGE))
-        // }
-        // let nextPage = (pageNumber + 1 <= maxPage) ? pageNumber + 1 : null;
-        // let prePage = (pageNumber - 1 >= 1) ? pageNumber - 1 : null;
-
-        // console.log(pageDetails)
-
-
         const postData = await Posts.find({}, "", {skip: skipItems, limit: perPage});
-        // const postDataIds = postData.map((pd) => {
-        //     return pd._id
-        // })
-        // const postComments = await Comment.find({_id: {$nin: postDataIds}})
 
-        // const pagination = {
-        //     total: totalCount,
-        //     currentPage: pageNumber,
-        //     nextPage: nextPage,
-        //     prePage: prePage
-        // }
         res.status(200)
         return res.json({"message": "All Post Lists", "pagination": pageDetails, "data": postData});
     } catch (err) {
