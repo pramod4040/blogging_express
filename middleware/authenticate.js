@@ -18,24 +18,24 @@ function authenticateTokenMiddleware(req, res, next) {
     });
 }
 
-function checkUserCanOperateOnPost(req, res, next) {
+async function checkUserCanOperateOnPost(req, res, next) {
     const username = req.authUser.username
     const id = req.params.id
 
-    const post = Posts.findById(id);
+    const post = await Posts.findById(id);
     if (post) {
         if (post.author != username) return res.status(403).json({"message": "Forbidden Access on this post!"})
     }
     next()
 }
 
-function checkUserCanOperateOnComment(req, res, next) {
+async function checkUserCanOperateOnComment(req, res, next) {
     const username = req.authUser.username
     const id = req.params.id
 
-    const post = Comment.findById(id);
-    if (post) {
-        if (post.author != username) return res.status(403).json({"message": "Forbidden Access on this post!"})
+    const commentData = await Comment.findById(id);
+    if (commentData) {
+        if (commentData.author != username) return res.status(403).json({"message": "Forbidden Access on this Comment!"})
     }
     next()
 }

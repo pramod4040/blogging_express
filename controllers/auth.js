@@ -3,7 +3,6 @@ const { hashPassword, comaprePassword, generateAccessToken } = require("../core/
 
 // Register Function
 async function registerUser(req, res) {
-    // TODO: index username, email for fast retrival
     try {
         const { username, email, password } = req.body
         const user = await User.findOne({ email })
